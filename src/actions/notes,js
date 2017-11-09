@@ -1,0 +1,10 @@
+// Action Creators are the functions that are dispatched to emit a change – all they do is return an action.
+
+let nextTodoId = 0
+export const addNote = text => {
+  return {
+    type: 'ADD_Note',
+    id: nextNoteId++,
+    text
+  }
+}
