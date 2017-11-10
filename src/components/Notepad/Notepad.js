@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Remarkable from 'remarkable'
 import './Notepad.css'
+import { addTodo } from '../../actions/notes'
 
 // Consider using Prism?
 
