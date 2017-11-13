@@ -1,6 +1,6 @@
-# notes
+# Markdowner
 
-> A Vue.js project
+> A Markdown editor using Vue.js.
 
 ## Build Setup
 
