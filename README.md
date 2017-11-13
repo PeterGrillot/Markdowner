@@ -1,6 +1,6 @@
 # Markdowner
 
-> A Markdown editor using Vue.js.
+A simple Markdown editor using Vue.js.
 
 ## Build Setup
 
