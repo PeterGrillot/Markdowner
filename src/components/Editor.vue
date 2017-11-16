@@ -1,15 +1,17 @@
 <template>
 	<div id="getNote">
 		<div class="user-input">
-			<textarea class="user-input__textarea"
+			<textarea ref="userInput" class="user-input__textarea"
 								:value="newNote"
 								@keyup="getNote"
 								placeholder="Markdown! Start Typing"></textarea>
 			<div class="button__group">
 				<button class="button"
-								@click="addNote"><i class="icon ion-document"></i></button>
+								@click="startNote"><i class="icon ion-document"></i> New</button>
 				<button class="button"
-								@click="openMenu"><i class="icon ion-folder"></i></button>
+								@click="saveNote"><i class="icon ion-archive"></i> Save</button>
+				<button class="button"
+								@click="openMenu"><i class="icon ion-folder"></i> Notes</button>
 			</div>
 		</div>
 		<div class="markdown-output" ref="output"></div>	
@@ -33,9 +35,16 @@ export default {
 		whatIsNote(){
 			return this.$store.dispatch('getNote')
 		},
-		addNote() {
-			this.$refs.output.innerHTML = ''
+		saveNote() {
+			// this.$refs.output.innerHTML = ''
 			this.$store.dispatch('addNote')
+			// this.$store.dispatch('clearNote')
+		},
+		startNote() {
+			if (this.$refs.userInput.value){
+				this.$store.dispatch('addNote')
+			}
+			this.$refs.output.innerHTML = ''
 			this.$store.dispatch('clearNote')
 		},
 		openMenu(event){
