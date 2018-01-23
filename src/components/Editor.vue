@@ -1,12 +1,18 @@
 <template>
-	<div id="Editor">
-		<div class="button__group">
+
+	<div id="getNote">
+		<div class="user-input">
+			<textarea ref="input" class="user-input__textarea"
+								:value="newNote"
+								@keyup="getNote"
+								placeholder="Markdown! Start Typing"></textarea>
+			<div class="button__group">
 				<button class="button"
 								@click="startNote"><i class="icon ion-document"></i> New</button>
 				<button class="button"
-								@click="saveNote"><i class="icon ion-archive"></i> Save</button>
+								@click="saveNote"><i class="icon ion-archive"></i></button>
 				<button class="button"
-								@click="openMenu"><i class="icon ion-folder"></i> Notes ({{notes.length}})</button>
+								@click="menu()"><i class="icon ion-folder"></i></button>
 			</div>
 		<div class="user-input">
 			<textarea ref="userInput" class="user-input__textarea"
@@ -37,28 +43,19 @@ export default {
 		whatIsNote(){
 			return this.$store.dispatch('getNote')
 		},
-		saveNote() {
-			// this.$refs.output.innerHTML = ''
-			this.$store.dispatch('addNote')
-			// this.$store.dispatch('clearNote')
-		},
-		startNote() {
-			if (this.$refs.userInput.value){
+		addNote() {
+
+			if(!!this.$refs.input.value){
+				this.$refs.output.innerHTML = ''
 				this.$store.dispatch('addNote')
+				this.$store.dispatch('clearNote')
 			}
-			this.$refs.output.innerHTML = ''
-			this.$store.dispatch('clearNote')
 		},
-		openMenu(event){
-			const toobarEl = document.getElementById('currentNotes')
-			if (toolbarOpen === false){
-				event.target.setAttribute('data-open',true)
-				toobarEl.setAttribute('data-open',true)
-			} else {
-				event.target.removeAttribute('data-open')
-				toobarEl.removeAttribute('data-open')
-			}
-			toolbarOpen = !toolbarOpen
+		saveNote() {
+			this.$store.dispatch('saveNote')	
+		},
+		menu(status) {
+			this.$store.dispatch('menuStatus')
 		},
 		closeMenu(event){
 			const toobarEl = document.getElementById('currentNotes')
@@ -73,10 +70,10 @@ export default {
 		newNote() {
 			return this.$store.getters.newNote
 		},
-		notes() {
-			return this.$store.getters.notes
+		menuStatus() {
+			return this.$store.getters.menuStatus
 		}
-	},
+	}
 }
 
 </script>
