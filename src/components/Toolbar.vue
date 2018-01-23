@@ -57,7 +57,8 @@ export default {
 	list-style: none;
 }
 .toolbar{
-	width: 400px;
+	width: 380px;
+	padding: 0 10px;
 	height: 100%;
 	background-color: white;
 	position: absolute;

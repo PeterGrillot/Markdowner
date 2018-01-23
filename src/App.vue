@@ -44,22 +44,14 @@ export default {
 <style>
 	html, body {
 		height: 100%;
-
 		font-family: 'Open Sans', sans-serif;
 		font-size: 18px;
-	}
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6{
-		font-family: 'Playfair Display', serif;
 	}
 	.container{
 		display: flex;
 		height: 100%;
 		position: relative;
+		overflow: hidden;
 	}
 	.header {
 		position: absolute;
@@ -78,6 +70,7 @@ export default {
 		display: flex;
 		height: 100%;
 		flex-basis: 100%;
+		overflow: hidden;
 	}
 	.toolbar { 
 		position: absolute;
@@ -92,12 +85,14 @@ export default {
 		align-items: center;
 	}
 	.button{
-		border-radius: 100%;
+		border-radius: 3px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 14px;
 		border: none;
 		background: linear-gradient(135deg, #0071ce 0%,#ef00ef 100%);
 		color: white;
-		height: 60px;
-		width: 60px;
+		height: 30px;
+		width: auto;
 		margin-right: 10px; 
 	}
 </style>
