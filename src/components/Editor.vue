@@ -1,7 +1,7 @@
 <template>
 	<div id="getNote">
 		<div class="user-input">
-			<textarea class="user-input__textarea"
+			<textarea ref="input" class="user-input__textarea"
 								:value="newNote"
 								@keyup="getNote"
 								placeholder="Markdown! Start Typing"></textarea>
@@ -9,7 +9,9 @@
 				<button class="button"
 								@click="addNote"><i class="icon ion-document"></i></button>
 				<button class="button"
-								@click="openMenu"><i class="icon ion-folder"></i></button>
+								@click="saveNote"><i class="icon ion-archive"></i></button>
+				<button class="button"
+								@click="menu()"><i class="icon ion-folder"></i></button>
 			</div>
 		</div>
 		<div class="markdown-output" ref="output"></div>	
@@ -34,27 +36,28 @@ export default {
 			return this.$store.dispatch('getNote')
 		},
 		addNote() {
-			this.$refs.output.innerHTML = ''
-			this.$store.dispatch('addNote')
-			this.$store.dispatch('clearNote')
-		},
-		openMenu(event){
-			const toobarEl = document.getElementById('currentNotes')
-			if (toolbarOpen === false){
-				event.target.setAttribute('data-open',true)
-				toobarEl.setAttribute('data-open',true)
-			} else {
-				event.target.removeAttribute('data-open')
-				toobarEl.removeAttribute('data-open')
+
+			if(!!this.$refs.input.value){
+				this.$refs.output.innerHTML = ''
+				this.$store.dispatch('addNote')
+				this.$store.dispatch('clearNote')
 			}
-			toolbarOpen = !toolbarOpen
+		},
+		saveNote() {
+			this.$store.dispatch('saveNote')	
+		},
+		menu(status) {
+			this.$store.dispatch('menuStatus')
 		},
 	},
 	computed: {
 		newNote() {
 			return this.$store.getters.newNote
+		},
+		menuStatus() {
+			return this.$store.getters.menuStatus
 		}
-	},
+	}
 }
 
 </script>
