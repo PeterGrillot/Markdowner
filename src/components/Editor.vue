@@ -1,5 +1,4 @@
 <template>
-
 	<div id="getNote">
 		<div class="user-input">
 			<textarea ref="input" class="user-input__textarea"
@@ -8,21 +7,14 @@
 								placeholder="Markdown! Start Typing"></textarea>
 			<div class="button__group">
 				<button class="button"
-								@click="startNote"><i class="icon ion-document"></i> New</button>
+								@click="addNote"><i class="icon ion-document"></i></button>
 				<button class="button"
 								@click="saveNote"><i class="icon ion-archive"></i></button>
 				<button class="button"
 								@click="menu()"><i class="icon ion-folder"></i></button>
 			</div>
-		<div class="user-input">
-			<textarea ref="userInput" class="user-input__textarea"
-								:value="newNote"
-								@keyup="getNote"
-								@focus="closeMenu"
-								placeholder="Markdown! Start Typing">
-			</textarea>
 		</div>
-		<div class="markdown-output" ref="output"></div>
+		<div class="markdown-output" ref="output"></div>	
 	</div>
 </template>
 
@@ -57,14 +49,6 @@ export default {
 		menu(status) {
 			this.$store.dispatch('menuStatus')
 		},
-		closeMenu(event){
-			const toobarEl = document.getElementById('currentNotes')
-			if (toolbarOpen === true){
-				event.target.removeAttribute('data-open')
-				toobarEl.removeAttribute('data-open')
-				toolbarOpen = !toolbarOpen
-			}
-		},
 	},
 	computed: {
 		newNote() {
@@ -77,23 +61,13 @@ export default {
 }
 
 </script>
-<style>
+<style scoped>
 .user-input{
 	display: flex;
 	position: relative;
 }
 .markdown-output{
 	padding: 0 6px;
-	font-family: 'Open Sans', sans-serif;
-	overflow-y: scroll;
-}
-.markdown-output h1,
-.markdown-output h2,
-.markdown-output h3,
-.markdown-output h4,
-.markdown-output h5,
-.markdown-output h6{
-	font-family: 'Oswald', sans-serif;
 }
 .markdown-output,
 .user-input{
@@ -109,7 +83,6 @@ export default {
 	background-color: #eee;
 	outline: none;
 	padding: 6px;
-	overflow-y: scroll;
 }
 code {
 	background: #f4f5f6;
