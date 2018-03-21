@@ -1,17 +1,18 @@
 <template>
 	<div id="getNote">
 		<div class="user-input">
+			<input class="filename__input" type="text" ref="filename" placeholder="File Name">
 			<textarea ref="input" class="user-input__textarea"
 								:value="newNote"
 								@keyup="getNote"
 								placeholder="Markdown! Start Typing"></textarea>
 			<div class="button__group">
 				<button class="button"
-								@click="addNote"><i class="icon ion-document"></i></button>
+								@click="addNote"  data-tooltip="Save to Menu"><i class="icon ion-plus"></i></button>
 				<button class="button"
-								@click="saveNote"><i class="icon ion-archive"></i></button>
+								@click="downloadNote"  data-tooltip="Download"><i class="icon ion-archive"></i></button>
 				<button class="button"
-								@click="menu()"><i class="icon ion-folder"></i></button>
+								@click="menu()" data-tooltip="Menu"><i class="icon ion-folder"></i></button>
 			</div>
 		</div>
 		<div class="markdown-output" ref="output"></div>	
@@ -36,15 +37,29 @@ export default {
 			return this.$store.dispatch('getNote')
 		},
 		addNote() {
-
 			if(!!this.$refs.input.value){
 				this.$refs.output.innerHTML = ''
 				this.$store.dispatch('addNote')
 				this.$store.dispatch('clearNote')
 			}
 		},
-		saveNote() {
-			this.$store.dispatch('saveNote')	
+		
+		downloadNote(event) {
+			let filename = this.$refs.filename.value;
+			if (!this.$refs.filename.value){
+				filename = 'untitled'
+			}
+			const element = document.createElement('a');
+			element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.$refs.input.value));
+			element.setAttribute('download', `${filename}.md`);
+
+			element.style.display = 'none';
+			document.body.appendChild(element);
+
+			element.click();
+
+			document.body.removeChild(element);
+			// this.$store.dispatch('addNote')	
 		},
 		menu(status) {
 			this.$store.dispatch('menuStatus')
@@ -65,6 +80,15 @@ export default {
 .user-input{
 	display: flex;
 	position: relative;
+}
+.filename__input{
+	position: absolute;
+	bottom: 1.2rem;
+	left: 1rem;
+	font-size: 1.4rem;
+	background: transparent;
+	border: navajowhite;
+	border-bottom: 2px solid #ccc;
 }
 .markdown-output{
 	padding: 0 6px;
