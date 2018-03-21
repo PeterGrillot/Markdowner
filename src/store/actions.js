@@ -18,6 +18,3 @@ export const saveNote = ({ commit }, note) => {
 export const removeNote = ({ commit }, note) => {
 	commit('REMOVE_NOTE', note)
 }
-export const clearNote = ({ commit }) => {
-	commit('CLEAR_NOTE')
-}

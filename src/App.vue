@@ -97,6 +97,29 @@ export default {
 		color: white;
 		height: 60px;
 		width: 60px;
-		margin-right: 10px; 
+		margin-right: 10px;
+		position: relative;
+		cursor: pointer;
+	}
+	.button:after {
+    content: attr(data-tooltip);
+    display: block;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s all;
+	}
+	.button:hover:after {
+    transition: .6s all;   
+    transition-delay: .3s; 
+		visibility: visible;
+    opacity: 1;
 	}
 </style>

@@ -27,8 +27,5 @@ export default {
 	[types.REMOVE_NOTE](state, note) {
 		var notes = state.notes
 		notes.splice(notes.indexOf(note), 1)
-	},
-	[types.CLEAR_NOTE](state) {
-		state.newNote = ''
 	}
 }
