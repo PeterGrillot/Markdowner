@@ -1,6 +1,6 @@
 <template>
 	<div id="currentNotes" :class="isMenuOpen">
-		<h3>Current({{notes.length}})</h3>
+		<h3>Current Notes({{notes.length}})</h3>
 		<ul class="list-group">
 			<li class="list-group-item"
 					v-for="note in notes">
@@ -8,12 +8,12 @@
 				<div class="btn-group">
 					<button type="button"
 									@click="edit(note)"
-									class="button">
-						<span class="icon ion-edit" alt="Edit"></span>
+									class="button" data-tooltip="Edit Note">
+						<span class="icon ion-edit"></span>
 					</button>
 					<button type="button"
 									@click="remove(note)"
-									class="button">
+									class="button" data-tooltip="Trash">
 						<span class="icon ion-trash-a"></span>
 					</button>
 				</div>
@@ -26,28 +26,27 @@
 export default {
 	methods: {
 		edit(note) {
-			this.$store.dispatch('editNote', note)
-			this.$store.dispatch('menuStatus')
+			this.$store.dispatch('editNote', note);
+			this.$store.dispatch('menuStatus');
 		},
 		complete(note) {
-			this.$store.dispatch('completeNote', note)
+			this.$store.dispatch('completeNote', note);
 		},
 		remove(note) {
-			this.$store.dispatch('removeNote', note)
+			this.$store.dispatch('removeNote', note);
 		}
 	},
 	computed: {
 		notes() {
-			return this.$store.getters.notes
+			return this.$store.getters.notes;
 		},
 		isMenuOpen() {
 			if( this.$store.getters.menuStatus === true){
-				return 'open'
+				return 'open';
 			}
 		}
 	}
 }
-
 </script>
 
 <style scoped>
