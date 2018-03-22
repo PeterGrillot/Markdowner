@@ -1,7 +1,7 @@
 <template>
 	<div id="getNote">
 		<div class="user-input">
-			<input class="filename__input" type="text" ref="filename" placeholder="File Name">
+			<input class="filename__input" type="text" ref="filename" value="untitled">
 			<textarea ref="input" class="user-input__textarea"
 								:value="newNote"
 								@keyup="getNote"
@@ -20,61 +20,55 @@
 </template>
 
 <script>
-import Remarkable from 'remarkable'
-const remarkable = new Remarkable()
-
+import Remarkable from 'remarkable';
+const remarkable = new Remarkable();
 let toolbarOpen = false;
 export default {
 	methods: {
 		getNote(event) {
-			this.$store.dispatch('getNote', event.target.value)
-			this.$refs.output.innerHTML = remarkable.render(event.target.value)
-			;[...document.querySelectorAll('pre code')].forEach((codeBlock)=>{
-				hljs.highlightBlock(document.querySelector('pre code'))
-			})
+			this.$store.dispatch('getNote', event.target.value);
+			this.$refs.output.innerHTML = remarkable.render(event.target.value);
+			[...document.querySelectorAll('pre code')].forEach((codeBlock)=>{
+				hljs.highlightBlock(document.querySelector('pre code'));
+			});
 		},
 		whatIsNote(){
-			return this.$store.dispatch('getNote')
+			return this.$store.dispatch('getNote');
 		},
 		addNote() {
 			if(!!this.$refs.input.value){
-				this.$refs.output.innerHTML = ''
-				this.$store.dispatch('addNote')
-				this.$store.dispatch('clearNote')
+				this.$refs.output.innerHTML = '';
+				this.$store.dispatch('addNote');
+				this.$store.dispatch('clearNote');
 			}
 		},
-		
 		downloadNote(event) {
-			let filename = this.$refs.filename.value;
-			if (!this.$refs.filename.value){
-				filename = 'untitled'
-			}
-			const element = document.createElement('a');
-			element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.$refs.input.value));
-			element.setAttribute('download', `${filename}.md`);
-
-			element.style.display = 'none';
-			document.body.appendChild(element);
-
-			element.click();
-
-			document.body.removeChild(element);
-			// this.$store.dispatch('addNote')	
+			const filename = this.$refs.filename.value;
+			if(!this.$refs.input.value){
+				alert('Nothing to save, start typing!');
+			} else{
+				const element = document.createElement('a');
+				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.$refs.input.value));
+				element.setAttribute('download', `${filename}.md`);
+				element.style.display = 'none';
+				document.body.appendChild(element);
+				element.click();
+				document.body.removeChild(element);
+			}			
 		},
 		menu(status) {
-			this.$store.dispatch('menuStatus')
+			this.$store.dispatch('menuStatus');
 		},
 	},
 	computed: {
 		newNote() {
-			return this.$store.getters.newNote
+			return this.$store.getters.newNote;
 		},
 		menuStatus() {
-			return this.$store.getters.menuStatus
+			return this.$store.getters.menuStatus;
 		}
 	}
 }
-
 </script>
 <style scoped>
 .user-input{
@@ -83,6 +77,7 @@ export default {
 }
 .filename__input{
 	position: absolute;
+	color: #888888;
 	bottom: 1.2rem;
 	left: 1rem;
 	font-size: 1.4rem;
