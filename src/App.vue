@@ -43,16 +43,10 @@ export default {
 <style>
 	html, body {
 		height: 100%;
-
 		font-family: 'Open Sans', sans-serif;
 		font-size: 18px;
 	}
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6{
+	h1,h2,h3,h4,h5,h6{
 		font-family: 'Playfair Display', serif;
 	}
 	.container{
@@ -100,11 +94,13 @@ export default {
 		margin-right: 10px;
 		position: relative;
 		cursor: pointer;
+		outline: none;
 	}
 	.button:after {
     content: attr(data-tooltip);
+    font-size: 12px;
     display: block;
-    width: 120px;
+    width: 100px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -115,6 +111,9 @@ export default {
     visibility: hidden;
     opacity: 0;
     transition: .3s all;
+	}
+	.button:hover{
+		background: linear-gradient(90deg, #0071ce 0%,#ef00ef 100%);
 	}
 	.button:hover:after {
     transition: .6s all;   
