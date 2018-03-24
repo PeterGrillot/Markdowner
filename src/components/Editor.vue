@@ -8,7 +8,7 @@
 								placeholder="Markdown! Start Typing"></textarea>
 			<div class="button__group">
 				<button class="button"
-								@click="addNote"  data-tooltip="Save to Menu"><i class="icon ion-plus"></i></button>
+								@click="saveNote"  data-tooltip="Save to Menu"><i class="icon ion-plus"></i></button>
 				<button class="button"
 								@click="downloadNote"  data-tooltip="Download"><i class="icon ion-archive"></i></button>
 				<button class="button"
@@ -37,9 +37,16 @@ export default {
 		},
 		addNote() {
 			if(!!this.$refs.input.value){
-				this.$refs.output.innerHTML = '';
+				// this.$refs.output.innerHTML = '';
 				this.$store.dispatch('addNote');
 				this.$store.dispatch('clearNote');
+			}
+		},
+		saveNote() {
+			if(!!this.$refs.input.value){
+				// this.$refs.output.innerHTML = '';
+				this.$store.dispatch('saveNote', this.$refs.input.value, this.$refs.filename.value);
+				console.log(this.$store.notes);
 			}
 		},
 		downloadNote(event) {

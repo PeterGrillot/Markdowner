@@ -6,15 +6,15 @@ export const menuStatus = ({ commit }, status) => {
 export const getNote = ({ commit }, note) => {
 	commit('GET_NOTE', note);
 }
-export const addNote = ({ commit }) => {
-	commit('ADD_NOTE');
+// export const addNote = ({ commit }) => {
+// 	commit('ADD_NOTE');
+// }
+// export const editNote = ({ commit }, note) => {
+// 	commit('EDIT_NOTE', note);
+// }
+export const saveNote = ({ commit }, note, title) => {
+	commit('SAVE_NOTE', note, title);
 }
-export const editNote = ({ commit }, note) => {
-	commit('EDIT_NOTE', note);
-}
-export const saveNote = ({ commit }, note) => {
-	commit('SAVE_NOTE', note);
-}
-export const removeNote = ({ commit }, note) => {
-	commit('REMOVE_NOTE', note);
-}
+// export const removeNote = ({ commit }, note) => {
+// 	commit('REMOVE_NOTE', note);
+// }
