@@ -12,8 +12,9 @@ export const getNote = ({ commit }, note) => {
 // export const editNote = ({ commit }, note) => {
 // 	commit('EDIT_NOTE', note);
 // }
-export const saveNote = ({ commit }, note, title) => {
-	commit('SAVE_NOTE', note, title);
+export const saveNote = ({ commit }, note) => {
+	console.log(note)
+	commit('SAVE_NOTE', note);
 }
 // export const removeNote = ({ commit }, note) => {
 // 	commit('REMOVE_NOTE', note);

@@ -37,16 +37,18 @@ export default {
 		},
 		addNote() {
 			if(!!this.$refs.input.value){
-				// this.$refs.output.innerHTML = '';
 				this.$store.dispatch('addNote');
 				this.$store.dispatch('clearNote');
 			}
 		},
 		saveNote() {
 			if(!!this.$refs.input.value){
-				// this.$refs.output.innerHTML = '';
-				this.$store.dispatch('saveNote', this.$refs.input.value, this.$refs.filename.value);
-				console.log(this.$store.notes);
+				const note = {
+					title: this.$refs.filename.value,
+					body: this.$refs.input.value
+				};
+				console.log(note);
+				this.$store.dispatch('saveNote', note);
 			}
 		},
 		downloadNote(event) {

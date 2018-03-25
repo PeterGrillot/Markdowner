@@ -4,7 +4,6 @@ import * as types from './mutation-types';
 export default {
 	[types.MENU_STATUS](state) {
 		state.status = !state.status;
-		console.log(`state: ${state.status}`);
 	},
 	[types.GET_NOTE](state, note) {
 		state.newNote = note;
@@ -25,10 +24,7 @@ export default {
 	// 	let notes = state.notes;
 	// 	notes.splice(notes.indexOf(note), 1);
 	// }
-	[types.SAVE_NOTE](state, note, title) {
-		state.notes.push({
-			title: title,
-			body: note
-		});
+	[types.SAVE_NOTE](state, note) {
+		state.notes.push(note);
 	}
 }
